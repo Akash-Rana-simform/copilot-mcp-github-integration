@@ -20,10 +20,10 @@ A complete demonstration of integrating the **GitHub MCP (Model Context Protocol
 
 ### Setup (5 minutes)
 
-1. **Clone this repository**
+1. **Open this workspace in VS Code**
    ```powershell
-   git clone <your-repo-url>
    cd copilot-mcp-github-integration
+   code .
    ```
 
 2. **Run setup script**
@@ -173,12 +173,14 @@ If you prefer manual setup:
 ### 2. Set Environment Variable
 **PowerShell:**
 ```powershell
-[System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'your_token_here', 'User')
+# Replace ghp_xxxxxxxxxxxx with your actual token
+[System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'ghp_xxxxxxxxxxxx', 'User')
 ```
 
 **Command Prompt:**
 ```cmd
-setx GITHUB_TOKEN "your_token_here"
+:: Replace ghp_xxxxxxxxxxxx with your actual token
+setx GITHUB_TOKEN "ghp_xxxxxxxxxxxx"
 ```
 
 ### 3. Verify Configuration

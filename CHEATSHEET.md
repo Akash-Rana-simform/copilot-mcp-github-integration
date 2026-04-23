@@ -8,8 +8,8 @@ Quick reference for using the GitHub MCP Server with VS Code Copilot.
 # Quick setup
 .\setup.ps1
 
-# Set token manually
-[System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'your_token', 'User')
+# Set token manually (replace ghp_xxxxxxxxxxxx with your actual token)
+[System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'ghp_xxxxxxxxxxxx', 'User')
 
 # Verify token
 $env:GITHUB_TOKEN
