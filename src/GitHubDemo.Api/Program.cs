@@ -15,6 +15,9 @@ builder.Services.AddSingleton<IGitHubService>(sp =>
     return new GitHubService(token);
 });
 
+// Configure Webhook service (for prompt engineering demo)
+builder.Services.AddSingleton<IWebhookService, WebhookService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline

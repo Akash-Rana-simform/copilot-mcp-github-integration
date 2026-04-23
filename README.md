@@ -142,17 +142,79 @@ copilot-mcp-github-integration/
 ├── .vscode/
 │   └── settings.json              # MCP server config
 ├── .github/
+│   ├── agents/
+│   │   └── docs-writer.md        # 🆕 Custom documentation agent
 │   ├── hooks/
 │   │   ├── security.json         # Security & monitoring hooks
 │   │   └── README.md             # Hooks documentation
+│   ├── issues/                    # 🆕 Sample task for custom agent
 │   └── logs/                      # Agent activity logs (auto-created)
 ├── src/
 │   └── GitHubDemo.Api/
 │       ├── Controllers/
-│       │   └── GitHubController.cs
+│       │   ├── GitHubController.cs
+│       │   ├── WebhookController.cs        # 🆕 Structured prompt result
+│       │   └── WebhookControllerVague.cs   # 🆕 Vague prompt comparison
 │       ├── Services/
 │       │   ├── IGitHubService.cs
-│       │   └── GitHubService.cs
+│       │   ├── GitHubService.cs
+│       │   ├── IWebhookService.cs          # 🆕 Webhook service interface
+│       │   └── WebhookService.cs           # 🆕 HMAC-SHA256 validation
+│       ├── Models/
+│       │   ├── CreateIssueRequest.cs
+│       │   ├── CreatePullRequestRequest.cs
+│       │   └── WebhookModels.cs            # 🆕 Webhook DTOs
+│       └── Program.cs
+├── examples/
+│   ├── demo-scenarios.md                    # Commands to try
+│   ├── testing-guide.md                     # Verification guide
+│   ├── prompt-engineering-experiment.md     # 🆕 Vague vs Structured
+│   ├── vague-vs-structured-comparison.md    # 🆕 Code comparison
+│   ├── EXPERIMENT-SUMMARY.md                # 🆕 Executive summary
+│   ├── webhook-service-guide.md             # 🆕 Webhook documentation
+│   └── test-webhook-comparison.ps1          # 🆕 Test script
+├── setup.ps1                                # Automated setup
+├── GitHubDemo.sln                          # .NET solution
+└── README.md
+```
+
+## 🔧 Features
+
+### GitHub MCP Integration
+- Natural language GitHub operations via Copilot
+- No code required for common GitHub tasks
+- MCP server handles authentication and API calls
+
+### .NET Web API (Traditional Approach)
+- Complete REST API using Octokit
+- Demonstrates traditional GitHub API integration
+- Useful for comparing MCP vs code-based approaches
+
+### 🆕 GitHub Webhook Handler
+Secure webhook receiver with production-ready features:
+- **HMAC-SHA256 signature validation** for security
+- **Structured payload handling** with validation
+- **Comprehensive logging** for debugging
+- **Pagination support** for webhook history
+- **Complete documentation** and examples
+
+📖 **[Read the Webhook Guide →](examples/webhook-service-guide.md)**
+
+### Security & Monitoring
+- Agent activity logging with hooks
+- Session and tool execution tracking
+- File edit audit trails
+
+### 🆕 Custom Agent: Documentation Writer
+Professional documentation specialist agent:
+- Creates comprehensive technical documentation
+- Writes API references with examples
+- Updates README files
+- Adds code comments and XML documentation
+
+💡 **Try it**: `@docs-writer Document the WebhookService class`
+
+📖 **[View Agent Profile →](.github/agents/docs-writer.md)**
 │       ├── Models/
 │       │   ├── CreateIssueRequest.cs
 │       │   └── CreatePullRequestRequest.cs
@@ -298,6 +360,29 @@ The GitHub MCP Server provides these tools (automatically used by Copilot):
 2. Use Octokit library
 3. Build REST API
 4. Handle auth and errors
+
+## 📚 Documentation & Examples
+
+### Getting Started
+- **[Quick Start Guide](QUICKSTART.md)** - 5-minute setup
+- **[Cheat Sheet](CHEATSHEET.md)** - Common commands reference
+- **[FAQ](examples/FAQ.md)** - Frequently asked questions
+
+### Demo Scenarios
+- **[10 Demo Scenarios](examples/demo-scenarios.md)** - Commands to try with Copilot
+- **[Testing Guide](examples/testing-guide.md)** - Verify MCP integration
+- **[Video Demo Script](examples/video-demo-script.md)** - Presentation guide
+
+### Advanced Topics
+- **[Prompt Engineering Experiment](examples/prompt-engineering-experiment.md)** - 🆕 Vague vs Structured prompts
+- **[Code Quality Comparison](examples/vague-vs-structured-comparison.md)** - 🆕 Side-by-side analysis
+- **[Custom Agent Demo](examples/CUSTOM-AGENT-DEMO.md)** - 🆕 Creating specialized AI agents
+- **[Custom Agent Guide](examples/custom-agent-guide.md)** - 🆕 How to use and create agents
+- **[Security Hooks](./github/hooks/README.md)** - Activity monitoring & audit logs
+
+**💡 Featured**: 
+- Learn how structured prompts produce **68% faster** development and **350% higher quality** code!
+- See how custom agents automate specialized tasks like documentation with **100% consistency**!
 
 ### Path 3: Combined Approach
 - Use MCP for **ad-hoc tasks** and exploration
