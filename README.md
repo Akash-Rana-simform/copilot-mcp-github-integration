@@ -141,6 +141,11 @@ Endpoints:
 copilot-mcp-github-integration/
 ├── .vscode/
 │   └── settings.json              # MCP server config
+├── .github/
+│   ├── hooks/
+│   │   ├── security.json         # Security & monitoring hooks
+│   │   └── README.md             # Hooks documentation
+│   └── logs/                      # Agent activity logs (auto-created)
 ├── src/
 │   └── GitHubDemo.Api/
 │       ├── Controllers/
@@ -226,7 +231,37 @@ Close all windows and reopen.
 
 [Complete troubleshooting guide →](examples/testing-guide.md)
 
-## 📚 Available MCP Tools
+## � Security & Monitoring Hooks
+
+This project includes a **security hooks system** that logs Copilot agent activity for audit and monitoring purposes.
+
+### Features
+- 📝 **Session Tracking** - Log when agent sessions start/end
+- 🛠️ **Tool Execution Logs** - Track all tools used by the agent
+- 📁 **File Edit Audit** - Monitor file modifications
+- 🔍 **Security Audit Trail** - Complete activity history
+
+### Quick Start
+```powershell
+# View hooks configuration
+Get-Content .github\hooks\security.json
+
+# View activity logs
+Get-Content .github\logs\agent-sessions.log
+Get-Content .github\logs\tool-executions.log
+
+# Monitor in real-time
+Get-Content .github\logs\tool-executions.log -Wait
+```
+
+### Documentation
+- **Configuration**: [.github/hooks/security.json](.github/hooks/security.json)
+- **Full Documentation**: [.github/hooks/README.md](.github/hooks/README.md)
+- **Verification Guide**: [.github/VERIFICATION.md](.github/VERIFICATION.md)
+
+**Note**: Hooks are pre-configured and ready to use. Log files are auto-created when Copilot agent executes actions.
+
+## �📚 Available MCP Tools
 
 The GitHub MCP Server provides these tools (automatically used by Copilot):
 

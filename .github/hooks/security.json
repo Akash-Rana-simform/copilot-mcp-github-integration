@@ -1,0 +1,69 @@
+{
+  "$schema": "https://github.com/github/copilot-hooks-schema",
+  "version": "1.0",
+  "description": "Security logging hooks for Copilot Agent monitoring",
+  "hooks": {
+    "sessionStart": {
+      "description": "Log agent session start events",
+      "enabled": true,
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; $logEntry = \"[$timestamp] SESSION_START - User: $env:USERNAME, Workspace: $env:PWD\"; $logFile = '.github/logs/agent-sessions.log'; New-Item -ItemType Directory -Force -Path (Split-Path $logFile) | Out-Null; Add-Content -Path $logFile -Value $logEntry"
+      ],
+      "async": true
+    },
+    "sessionEnd": {
+      "description": "Log agent session end events",
+      "enabled": true,
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; $logEntry = \"[$timestamp] SESSION_END - Duration: ${env:COPILOT_SESSION_DURATION}s\"; $logFile = '.github/logs/agent-sessions.log'; Add-Content -Path $logFile -Value $logEntry"
+      ],
+      "async": true
+    },
+    "preToolUse": {
+      "description": "Log all tool executions before they run",
+      "enabled": true,
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; $toolName = $env:COPILOT_TOOL_NAME; $toolArgs = $env:COPILOT_TOOL_ARGS; $logEntry = \"[$timestamp] PRE_TOOL - Tool: $toolName, Args: $toolArgs\"; $logFile = '.github/logs/tool-executions.log'; New-Item -ItemType Directory -Force -Path (Split-Path $logFile) | Out-Null; Add-Content -Path $logFile -Value $logEntry"
+      ],
+      "async": true,
+      "timeout": 5000
+    },
+    "postToolUse": {
+      "description": "Log tool execution results",
+      "enabled": true,
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; $toolName = $env:COPILOT_TOOL_NAME; $status = $env:COPILOT_TOOL_STATUS; $logEntry = \"[$timestamp] POST_TOOL - Tool: $toolName, Status: $status\"; $logFile = '.github/logs/tool-executions.log'; Add-Content -Path $logFile -Value $logEntry"
+      ],
+      "async": true
+    },
+    "preFileEdit": {
+      "description": "Log file edit attempts for security audit",
+      "enabled": true,
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; $filePath = $env:COPILOT_FILE_PATH; $logEntry = \"[$timestamp] PRE_FILE_EDIT - File: $filePath, User: $env:USERNAME\"; $logFile = '.github/logs/file-edits.log'; New-Item -ItemType Directory -Force -Path (Split-Path $logFile) | Out-Null; Add-Content -Path $logFile -Value $logEntry"
+      ],
+      "async": true
+    }
+  },
+  "settings": {
+    "logDirectory": ".github/logs",
+    "logRetentionDays": 30,
+    "enableDetailedLogging": true,
+    "alertOnSuspiciousActivity": false
+  }
+}
