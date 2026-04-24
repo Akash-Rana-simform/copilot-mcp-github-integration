@@ -1,0 +1,122 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Title",
+    "description": "API Description",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support",
+      "email": "support@example.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://localhost:5000",
+      "description": "Development server"
+    },
+    {
+      "url": "https://api.production.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {},
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "ApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      },
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "400BadRequest": {
+        "description": "Bad Request - Invalid input",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            },
+            "example": {
+              "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+              "title": "Bad Request",
+              "status": 400,
+              "detail": "One or more validation errors occurred.",
+              "errors": {
+                "field": ["Validation error message"]
+              }
+            }
+          }
+        }
+      },
+      "401Unauthorized": {
+        "description": "Unauthorized - Invalid or missing authentication",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            },
+            "example": {
+              "type": "https://tools.ietf.org/html/rfc7235#section-3.1",
+              "title": "Unauthorized",
+              "status": 401,
+              "detail": "Authentication required"
+            }
+          }
+        }
+      },
+      "404NotFound": {
+        "description": "Not Found - Resource does not exist",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            },
+            "example": {
+              "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+              "title": "Not Found",
+              "status": 404,
+              "detail": "Resource not found"
+            }
+          }
+        }
+      },
+      "500InternalServerError": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            },
+            "example": {
+              "type": "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+              "title": "Internal Server Error",
+              "status": 500,
+              "detail": "An unexpected error occurred"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Webhooks",
+      "description": "Webhook management operations"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "propertyName": {
+      "type": "string",
+      "description": "Property description",
+      "maxLength": 100,
+      "example": "Example value"
+    }
+  },
+  "required": ["propertyName"],
+  "additionalProperties": false
+}

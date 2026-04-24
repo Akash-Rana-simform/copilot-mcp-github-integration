@@ -215,6 +215,19 @@ Professional documentation specialist agent:
 💡 **Try it**: `@docs-writer Document the WebhookService class`
 
 📖 **[View Agent Profile →](.github/agents/docs-writer.md)**
+
+### 🆕 Custom Skill: API Documentation Generator
+Automated API documentation generation skill:
+- Generates OpenAPI 3.0 specifications
+- Creates markdown API reference docs
+- Produces code examples (curl, C#, etc.)
+- Extracts metadata from C# controllers
+- Validates OpenAPI specs
+- Generates Postman collections
+
+💡 **Try it**: `/api-docs-generator all controllers`
+
+📖 **[View Skill Documentation →](.github/skills/api-docs-generator/README.md)** | **[See Demo →](.github/skills/api-docs-generator/DEMO.md)**
 │       ├── Models/
 │       │   ├── CreateIssueRequest.cs
 │       │   └── CreatePullRequestRequest.cs
